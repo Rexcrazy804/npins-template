@@ -5,12 +5,10 @@
   lolask,
 }:
 mkShellNoCC {
-  shellHook = ''
-    echo "Hello Cutie ~"
-  '';
   packages = [
     cowask
     lolask
-    pkgs.hello
+    pkgs.just
+    pkgs.jq
   ];
 }
