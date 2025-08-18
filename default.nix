@@ -7,6 +7,8 @@ pkgs.lib.fix (self: let
   inherit (pkgs.lib) callPackageWith;
   callPackage = callPackageWith (pkgs // self.packages);
 in {
+  formatter = pkgs.alejandra;
+
   packages = {
     cowask = callPackage ./nix/pkgs/cowask.nix {};
     lolask = callPackage ./nix/pkgs/lolask.nix {};
