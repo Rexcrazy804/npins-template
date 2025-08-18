@@ -17,7 +17,7 @@ fmt +args=".":
     nix-shell default.nix -A formatter --run "$MAIN_PROGRAM {{ args }}"
 
 # enter a devShell
-shell shell="default":
+develop shell="default":
     nix-shell default.nix -A devShells.{{ shell }}
 
 # list attributes
