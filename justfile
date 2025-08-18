@@ -3,6 +3,14 @@ REBUILD_CMD := require('nixos-rebuild')
 alias rb := rebuild
 alias sh := develop
 
+_default:
+  @just -l
+
+# list attributes
+[group("extra")]
+list attr="packages":
+    nix eval --file default.nix {{ attr }} --json | jq
+
 # build a package
 [group("nix")]
 build package="default":
@@ -26,11 +34,6 @@ _run attr args:
 [group("nix")]
 develop shell="default":
     nix-shell default.nix -A devShells.{{ shell }}
-
-# list attributes
-[group("extra")]
-list attr="packages":
-    nix eval --file default.nix {{ attr }} --json | jq
 
 # rebuild nixos configuration
 [group("nixos")]
