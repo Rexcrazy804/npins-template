@@ -7,7 +7,7 @@
       descprition = "An elegant flake like npins template";
       welcomeText = ''
         # Rexiel's npins template
-        See the justfile for common commands to build 
+        See the justfile for common commands to build
         and use the default.nix.
       '';
     };
