@@ -1,5 +1,8 @@
 # the cow knows everything
-{writers, cowsay}:
+{
+  writers,
+  cowsay,
+}:
 writers.writeFishBin "cowask" ''
   set message $argv[1]
   if test "$message" = --help
