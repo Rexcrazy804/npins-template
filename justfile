@@ -10,19 +10,17 @@ build package="default":
 
 # build and run a package
 [group("nix")]
-run package="default" +args="":
-    #!/usr/bin/env bash
-    set -euo pipefail
-    MAIN_PROGRAM=$(nix eval --file default.nix packages.{{ package }}.meta.mainProgram --raw)
-    nix-shell default.nix -A packages.{{ package }} --run "$MAIN_PROGRAM {{ quote(args) }}"
+run package="default" +args="": (_run ("packages." + package) args)
 
 # build and run the formatter
 [group("nix")]
-fmt +args=".":
+fmt +args=".": (_run "formatter" args)
+
+_run attr args:
     #!/usr/bin/env bash
     set -euo pipefail
-    MAIN_PROGRAM=$(nix eval --file default.nix formatter.meta.mainProgram --raw)
-    nix-shell default.nix -A formatter --run "$MAIN_PROGRAM {{ args }}"
+    MAIN_PROGRAM=$(nix eval --file default.nix {{ attr }}.meta.mainProgram --raw)
+    nix-shell default.nix -A {{ attr }} --command "$MAIN_PROGRAM {{ args }}"
 
 # enter a devShell
 [group("nix")]
