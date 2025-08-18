@@ -1,3 +1,8 @@
+REBUILD_CMD := require('nixos-rebuild')
+
+alias rb := rebuild
+alias sh := develop
+
 # build a package
 [group("nix")]
 build package="default":
@@ -28,3 +33,8 @@ develop shell="default":
 [group("extra")]
 list attr="packages":
     nix eval --file default.nix {{ attr }} --json | jq
+
+# rebuild nixos configuration
+[group("nixos")]
+rebuild cmd host=`hostname` +args='':
+    {{ REBUILD_CMD }} --log-format bar --no-reexec --file . -A nixosConfigurations.{{ host }} {{ cmd }} {{ args }}
