@@ -11,6 +11,11 @@ _default:
 list attr="packages":
     nix eval --file default.nix {{ attr }} --json | jq
 
+# update npins sources
+[group("extra")]
+update +sources='':
+    npins update {{sources}}
+
 # build a package
 [group("nix")]
 build package="default":
