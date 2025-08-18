@@ -4,7 +4,7 @@
   pkgs ? import pins.nixpkgs {},
 }:
 pkgs.lib.fix (self: let
-  inherit (pkgs.lib) callPackageWith;
+  inherit (pkgs.lib) callPackageWith modules;
   inherit (pkgs) nixos;
   callPackage = callPackageWith (pkgs // self.packages);
 in {
@@ -23,6 +23,16 @@ in {
   };
 
   nixosConfigurations = {
-    cowHost = nixos [./nix/hosts/cowHost/configuration.nix];
+    cowHost = nixos [
+      ./nix/hosts/cowHost/configuration.nix
+      self.nixosModules.default
+    ];
+  };
+
+  nixosModules = {
+    # read https://noogle.dev/f/lib/modules/importApply
+    # for why its done this way
+    cowModule = modules.importApply ./nix/modules/cowModule.nix self;
+    default = self.nixosModules.cowModule;
   };
 })
