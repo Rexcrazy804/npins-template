@@ -4,7 +4,7 @@
     (modulesPath + "/virtualisation/qemu-vm.nix")
   ];
 
-  networking.hostName = "basicvm";
+  networking.hostName = "cowHost";
   system.stateVersion = "25.05";
   virtualisation = {
     graphics = false;
