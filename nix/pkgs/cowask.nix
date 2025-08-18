@@ -1,5 +1,5 @@
 # the cow knows everything
-{writers}:
+{writers, cowsay}:
 writers.writeFishBin "cowask" ''
   set message $argv[1]
   if test "$message" = --help
@@ -8,5 +8,5 @@ writers.writeFishBin "cowask" ''
   end
 
   set answer (random choice "yes lol" "nope, never")
-  cowsay $message"?"\n $answer
+  ${cowsay}/bin/cowsay $message"?"\n $answer
 ''
