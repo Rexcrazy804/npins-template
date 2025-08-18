@@ -24,4 +24,7 @@
     extraGroups = ["wheel"];
     packages = [];
   };
+
+  # <>< kokomi was here
+  cowMod.enable = true;
 }
