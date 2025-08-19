@@ -16,6 +16,11 @@ list attr="packages":
 update +sources='':
     npins update {{ sources }}
 
+# enter a nix repl with attrs from default.nix loaded
+[group("extra")]
+repl:
+    nix repl --file .
+
 # build a package
 [group("nix")]
 build package="default":
