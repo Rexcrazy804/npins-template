@@ -30,10 +30,11 @@ run package="default" +args="": (_run ("packages." + package) args)
 fmt +args=".": (_run "formatter" args)
 
 _run attr args:
-    #!/usr/bin/env bash
+    #!/usr/bin/env nix-shell 
+    #!nix-shell -i bash {{ `pwd` }}/default.nix -A {{ attr }}
     set -euo pipefail
     MAIN_PROGRAM=$(nix eval --file default.nix {{ attr }}.meta.mainProgram --raw)
-    nix-shell default.nix -A {{ attr }} --command "$MAIN_PROGRAM {{ args }}"
+    $MAIN_PROGRAM {{ args }}
 
 # enter a devShell
 [group("nix")]
