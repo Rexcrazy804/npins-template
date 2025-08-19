@@ -6,10 +6,12 @@ alias sh := develop
 _default:
     @just -l
 
-# list attributes
+# list available packages
 [group("extra")]
-list attr="packages":
-    nix eval --file default.nix {{ attr }} --json | jq
+list:
+    @nix eval --file default.nix packages --json --read-only --apply \
+    'x: builtins.mapAttrs (k: v: if v.meta ? description then v.meta.description else v.name) x' \
+    | jq
 
 # update npins sources
 [group("extra")]
