@@ -5,5 +5,5 @@
   lolcat,
 }:
 writers.writeFishBin "lolask" ''
-  ${cowask}/bin/cowask $argv[1] | ${lolcat}/bin/lolcat
+  ${cowask}/bin/cowask $argv | ${lolcat}/bin/lolcat
 ''

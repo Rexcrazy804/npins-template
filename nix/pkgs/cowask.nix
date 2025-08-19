@@ -4,12 +4,12 @@
   cowsay,
 }:
 writers.writeFishBin "cowask" ''
-  set message $argv[1]
+  set message $argv
   if test "$message" = --help
     echo "Usage: cowask <message>"
     exit
   end
 
   set answer (random choice "yes lol" "nope, never")
-  ${cowsay}/bin/cowsay $message"?"\n $answer
+  ${cowsay}/bin/cowsay "$message?" \n $answer
 ''
