@@ -38,7 +38,8 @@ fmt +args=".": (_run "formatter" args)
 
 _run attr args:
     #!/usr/bin/env nix-shell 
-    #!nix-shell -i bash {{ `pwd` }}/default.nix -A {{ attr }}
+    #!nix-shell -i bash
+    #!nix-shell -p 'with import {{ `pwd` }} {}; {{ attr }}'
     set -euo pipefail
     MAIN_PROGRAM=$(nix eval --file default.nix {{ attr }}.meta.mainProgram --raw)
     $MAIN_PROGRAM {{ args }}
