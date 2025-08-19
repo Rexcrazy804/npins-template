@@ -6,7 +6,6 @@
 # read https://noogle.dev/f/lib/fix
 pkgs.lib.fix (self: let
   inherit (pkgs.lib) callPackageWith modules;
-  inherit (pkgs) nixos;
   # read https://nix.dev/tutorials/callpackage.html#interdependent-package-sets
   callPackage = callPackageWith (pkgs // self.packages);
 in {
@@ -25,7 +24,7 @@ in {
   };
 
   nixosConfigurations = {
-    cowHost = nixos [
+    cowHost = pkgs.nixos [
       ./nix/hosts/cowHost/configuration.nix
       self.nixosModules.default
     ];
