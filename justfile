@@ -4,7 +4,7 @@ alias rb := rebuild
 alias sh := develop
 
 _default:
-  @just -l
+    @just -l
 
 # list attributes
 [group("extra")]
@@ -14,7 +14,7 @@ list attr="packages":
 # update npins sources
 [group("extra")]
 update +sources='':
-    npins update {{sources}}
+    npins update {{ sources }}
 
 # build a package
 [group("nix")]
