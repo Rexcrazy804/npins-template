@@ -3,9 +3,11 @@
   pins ? import ./npins // overrides,
   pkgs ? import pins.nixpkgs {},
 }:
+# read https://noogle.dev/f/lib/fix
 pkgs.lib.fix (self: let
   inherit (pkgs.lib) callPackageWith modules;
   inherit (pkgs) nixos;
+  # read https://nix.dev/tutorials/callpackage.html#interdependent-package-sets
   callPackage = callPackageWith (pkgs // self.packages);
 in {
   formatter = pkgs.alejandra;
@@ -31,7 +33,6 @@ in {
 
   nixosModules = {
     # read https://noogle.dev/f/lib/modules/importApply
-    # for why its done this way
     cowModule = modules.importApply ./nix/modules/cowModule.nix self;
     default = self.nixosModules.cowModule;
   };
