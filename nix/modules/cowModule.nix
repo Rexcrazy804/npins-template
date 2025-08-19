@@ -1,4 +1,4 @@
-super: {
+{packages, ...}: {
   lib,
   config,
   ...
@@ -8,7 +8,7 @@ in {
   options.cowMod.enable = mkEnableOption "cow";
   config = mkIf (config.cowMod.enable) {
     environment.systemPackages = attrValues {
-      inherit (super.packages) cowask lolask;
+      inherit (packages) cowask lolask;
     };
   };
 }
