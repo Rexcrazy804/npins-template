@@ -1,3 +1,7 @@
+#!/usr/bin/env nix-shell
+#!nix-shell -i "just --justfile" --quiet
+#!nix-shell -p just
+
 REBUILD_CMD := require('nixos-rebuild')
 
 alias rb := rebuild
